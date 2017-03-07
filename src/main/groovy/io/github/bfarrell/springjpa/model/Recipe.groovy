@@ -6,7 +6,8 @@ import javax.persistence.FetchType
 import javax.persistence.Id
 import javax.persistence.OneToMany
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonManagedReference;;
 
 @Entity
 class Recipe {
@@ -14,6 +15,8 @@ class Recipe {
     String name
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "recipe")
+    // Use the following annotation to resolve infinite recursion
+    @JsonManagedReference
     List<Ingredient> ingredients
     
     String getName() {

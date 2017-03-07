@@ -7,6 +7,8 @@ import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 class Ingredient {
     
@@ -17,6 +19,8 @@ class Ingredient {
     
     @ManyToOne
     @JoinColumn(name = "recipe_name")
+    // Use the following annotation to resolve infinite recursion
+    @JsonBackReference
     Recipe recipe    
     
     long getId() {
